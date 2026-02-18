@@ -1,0 +1,78 @@
+quest-1:
+  id: quest-1
+  type: MINING
+  target: DIAMOND_ORE
+  required-amount: 10
+  reward-command: "eco give %player% 1000"
+  reward-items: []
+  gui-item:
+    material: DIAMOND_PICKAXE
+    amount: 1
+    name: "&b&lDiamond Miner &7(ID: #1)"
+    lore:
+      - ""
+      - "&7Goal: &fMine 10 Diamonds"
+      - "&7Progress: &e%progress%&7/&e%required% &8(%percentage%%)"
+      - ""
+      - "&7Rewards:"
+      - " &8- &a$1,000"
+      - ""
+      - "&eClick to track this quest!"
+    flags:
+      - HIDE_ATTRIBUTES
+      - HIDE_ENCHANTS
+    custom-model-data: 105
+
+quest-2:
+  id: quest-2
+  type: KILLING
+  target: ZOMBIE
+  required-amount: 50
+  reward-command: "eco give %player% 500"
+  reward-items: []
+  gui-item:
+    material: ROTTEN_FLESH
+    amount: 1
+    name: "&c&lZombie Slayer"
+    lore:
+      - ""
+      - "&7Status: &f%status%"
+      - "&7Progress: &e%progress%&7/&e%required%"
+      - ""
+    flags: []
+    custom-model-data: 0
+
+quest-3:
+  id: quest-3
+  type: RUNNING
+  target: "ANY"
+  required-amount: 1000
+  reward-command: ""
+  reward-items: []
+  gui-item:
+    material: LEATHER_BOOTS
+    amount: 1
+    name: "&e&lMarathon Runner"
+    lore:
+      - "&7Walk &e%required% &7blocks."
+      - "&7Progress: &e%progress%&7/&e%required% &8(%percentage%%)"
+    flags:
+      - HIDE_ATTRIBUTES
+    custom-model-data: 0
+
+quest-4:
+  id: quest-4
+  type: EXPLORING
+  target: "mushroom_fields"
+  required-amount: 1
+  reward-command: "eco give %player% 250"
+  reward-items: []
+  gui-item:
+    material: BROWN_MUSHROOM
+    amount: 1
+    name: "&d&lMushroom Explorer"
+    lore:
+      - "&7Explore a Mushroom Fields biome."
+      - "&7Status: &f%status%"
+    flags: []
+    custom-model-data: 0

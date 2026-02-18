@@ -1,0 +1,20 @@
+mongodb:
+  uri: "mongodb://localhost:27017"
+  database: "quests"
+  connection-timeout-ms: 5000
+
+save-interval-seconds: 30
+
+messages:
+  prefix: "&8[&bQuests&8] &r"
+  status-completed: "&aCompleted"
+  status-in-progress: "&eIn Progress"
+  status-not-started: "&7Not Started"
+  quest-complete: "&a&lQuest Complete! &7You finished: &e%quest_name%"
+  no-permission: "&cYou don't have permission."
+  player-not-found: "&cPlayer not found."
+  quest-not-found: "&cQuest not found: %id%"
+  progress-set: "&aSet %player%'s progress on %quest% to %value%."
+  quest-reset: "&aReset %player%'s quest: %quest%."
+  reload-complete: "&aConfiguration reloaded successfully."
+  invalid-value: "&cValue must be a non-negative integer."
