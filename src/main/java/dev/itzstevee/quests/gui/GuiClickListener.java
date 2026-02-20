@@ -10,11 +10,15 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 public class GuiClickListener implements Listener {
 
     private final GuiManager guiManager;
-    private final FileConfiguration guiConfig;
+    private final int previousPageSlot;
+    private final int nextPageSlot;
+    private final int closeButtonSlot;
 
     public GuiClickListener(GuiManager guiManager, FileConfiguration guiConfig) {
         this.guiManager = guiManager;
-        this.guiConfig = guiConfig;
+        this.previousPageSlot = guiConfig.getInt("gui.previous-page-slot", 45);
+        this.nextPageSlot = guiConfig.getInt("gui.next-page-slot", 53);
+        this.closeButtonSlot = guiConfig.getInt("gui.close-button-slot", 49);
     }
 
     @EventHandler
@@ -25,11 +29,8 @@ public class GuiClickListener implements Listener {
         event.setCancelled(true);
 
         int slot = event.getRawSlot();
-        int prevSlot = guiConfig.getInt("gui.previous-page-slot", 45);
-        int nextSlot = guiConfig.getInt("gui.next-page-slot", 53);
-        int closeSlot = guiConfig.getInt("gui.close-button-slot", 49);
 
-        if (slot == prevSlot) {
+        if (slot == previousPageSlot) {
             int currentPage = guiManager.getPlayerPage(player.getUniqueId());
             if (currentPage > 1) {
                 guiManager.openGui(player, currentPage - 1);
@@ -37,7 +38,7 @@ public class GuiClickListener implements Listener {
             return;
         }
 
-        if (slot == nextSlot) {
+        if (slot == nextPageSlot) {
             int currentPage = guiManager.getPlayerPage(player.getUniqueId());
             int totalPages = guiManager.getRenderer().getTotalPages();
             if (currentPage < totalPages) {
@@ -46,7 +47,7 @@ public class GuiClickListener implements Listener {
             return;
         }
 
-        if (slot == closeSlot) {
+        if (slot == closeButtonSlot) {
             player.closeInventory();
         }
     }

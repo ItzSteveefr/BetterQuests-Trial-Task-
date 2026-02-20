@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class QuestRegistry {
 
     private final Logger logger;
     private final Map<String, Quest> quests = new HashMap<>();
+    private final Map<QuestType, List<Quest>> questsByType = new EnumMap<>(QuestType.class);
 
     public QuestRegistry(Logger logger) {
         this.logger = logger;
@@ -24,6 +26,11 @@ public class QuestRegistry {
 
     public void load(FileConfiguration questsConfig) {
         quests.clear();
+        questsByType.clear();
+        for (QuestType type : QuestType.values()) {
+            questsByType.put(type, new ArrayList<>());
+        }
+
         for (String key : questsConfig.getKeys(false)) {
             ConfigurationSection section = questsConfig.getConfigurationSection(key);
             if (section == null) continue;
@@ -78,6 +85,7 @@ public class QuestRegistry {
 
                 Quest quest = new Quest(id, type, target, requiredAmount, rewardCommand, rewardItems, guiItem);
                 quests.put(id, quest);
+                questsByType.get(type).add(quest);
             } catch (Exception e) {
                 logger.warning("Failed to load quest '" + key + "': " + e.getMessage());
             }
@@ -94,12 +102,6 @@ public class QuestRegistry {
     }
 
     public List<Quest> getQuestsByType(QuestType type) {
-        List<Quest> result = new ArrayList<>();
-        for (Quest quest : quests.values()) {
-            if (quest.getType() == type) {
-                result.add(quest);
-            }
-        }
-        return result;
+        return questsByType.getOrDefault(type, Collections.emptyList());
     }
 }
